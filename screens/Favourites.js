@@ -3,6 +3,7 @@ import { View , Text, StyleSheet} from "react-native"
 export default Favourites = () => {
     return (
         <View style={styles.container}>
+            <StatusBar backgroundColor={'#999'}/>
             <Text>Favourites screen</Text>
         </View>
     )

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Image, Text, TouchableOpacity, Alert } from "react-native"
+import { SafeAreaView, StyleSheet, View, Image, Text, TouchableOpacity, StatusBar } from "react-native"
 import LogoAndText from "../components/LogoAndText"
 import { TextInput } from "react-native-gesture-handler"
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -18,6 +18,7 @@ export default SignIn = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar backgroundColor={'#999'}/>
             <LogoAndText text={'Welcome'}/>
 
             <View style={styles.ContentContainer}>

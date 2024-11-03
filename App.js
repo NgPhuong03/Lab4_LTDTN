@@ -8,7 +8,7 @@ const RootStack = () => {
   const {isAuthenticated} = useContext(AuthContext);
   return (
     <NavigationContainer>
-      {!isAuthenticated ? <BottomNavigation/> : <AuthNavigator/>}
+      {isAuthenticated ? <BottomNavigation/> : <AuthNavigator/>}
     </NavigationContainer>
   )
 }

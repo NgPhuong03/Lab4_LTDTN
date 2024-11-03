@@ -17,6 +17,7 @@ export default SignIn = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar backgroundColor={'#999'}/>
             <LogoAndText text={'Create New Account'}/>
 
             <View style={styles.ContentContainer}>

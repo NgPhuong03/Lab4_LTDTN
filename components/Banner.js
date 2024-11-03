@@ -5,7 +5,6 @@ import RenderItem from "../components/RenderItem";
 import Animated, {
   scrollTo,
   useAnimatedRef,
-  useAnimatedScrollHandler,
   useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
@@ -40,8 +39,9 @@ export default Banner = () => {
   }, [isAutoplay, offset]);
 
   return (
-    <View style={styles.container}>
+    <View >
       <Animated.FlatList
+        contentContainerStyle={{ flexGrow: 1 }}
         onScrollBeginDrag={() => setAutoplay(false)}
         onScrollEndDrag={() => setAutoplay(true)}
         bounces={false}
@@ -62,11 +62,3 @@ export default Banner = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 4,
-    backgroundColor: "#ccc",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

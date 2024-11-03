@@ -1,4 +1,4 @@
-import { View, StyleSheet, StatusBar } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 export default HotDeals = () => {
   return (

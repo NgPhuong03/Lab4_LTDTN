@@ -27,7 +27,7 @@ export default BottomNavigation = () => {
             )
         }}/>
       <MainBottom.Screen name='Profile' component={Profile} 
-        options={{tabBarIcon: ({color}) => <Icon name="user" size={24} color={color}/>}}/>
+        options={{tabBarIcon: ({color}) => <Icon name="user" size={24} color={color}/>, headerShown: false}}/>
     </MainBottom.Navigator>
   )
 }

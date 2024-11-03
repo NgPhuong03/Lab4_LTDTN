@@ -5,6 +5,7 @@ import HotDeals from '../components/HotDeals';
 export default Home = () => {
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'#999'}/>
       <Banner />
       <HotDeals/>
     </View>
@@ -13,9 +14,8 @@ export default Home = () => {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 4,
     flex: 1,
-    backgroundColor: "#ccc",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#ccc"
   },
 });
