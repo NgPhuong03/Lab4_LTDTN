@@ -2,9 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View ,Text, StyleSheet} from 'react-native';
 import Home from '../screens/Home';
 import Categories from '../screens/Categories';
-import Profile from '../screens/Profile';
 import Favourites from '../screens/Favourites';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ProfileStack from './ProfileStack';
 
 const MainBottom = createBottomTabNavigator();
 export default BottomNavigation = () => {
@@ -26,7 +26,7 @@ export default BottomNavigation = () => {
                 </View>
             )
         }}/>
-      <MainBottom.Screen name='Profile' component={Profile} 
+      <MainBottom.Screen name='Profile' component={ProfileStack} 
         options={{tabBarIcon: ({color}) => <Icon name="user" size={24} color={color}/>, headerShown: false}}/>
     </MainBottom.Navigator>
   )

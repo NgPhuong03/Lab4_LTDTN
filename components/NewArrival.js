@@ -8,7 +8,7 @@ import {
 import Product from "../CustomComponents/Product";
 import { useEffect, useState } from "react";
 
-export default HotDeals = ({ items }) => {
+export default NewArrial = ({ items }) => {
  
 
   const renderItem = ({ item }) => (

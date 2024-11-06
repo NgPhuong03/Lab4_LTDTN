@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import { Alert, ActivityIndicator } from "react-native";
+import { Alert, ActivityIndicator , StyleSheet, View} from "react-native";
+
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
@@ -10,51 +11,50 @@ const AuthContext = createContext();
 const MyProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const [decode, setDecode] = useState();
 
-  // '22521159@gm.uit.edu.vn'
-  useEffect(() => {
-    const getToken = async (username, password) => {
-      await axios
-         .post("https://fakestoreapi.com/auth/login", {
-           username: "mor_2314",
-           password: "83r5^_",
-         })
-         .then(function (response) {
-           setToken(response.data.token);
-           
-         })
-         .catch(function (error) {
-           console.log(error);
-         });
-   }
+  const LogIn = async (username, password) => {
+    await axios
+      .post("https://fakestoreapi.com/auth/login", {
+        username: "mor_2314",
+        password: "83r5^_",
+      })
+      .then(function (response) {
+        const x = response.data.token;
+        setToken(x);
+        console.log("token: " + x);
 
-    getToken();
-}, [isLoading]); // Mảng rỗng để chạy một lần khi component mount
-
-
-
-  const LogIn =  (username, password) => {
-    setLoading(true);
-      console.log("token: "+ token);
-      if (token) {
-        setLoading(false);
-        setDecode(jwtDecode(token));
-        setAuthenticated(true);
-      }
+        if (x) {
+          setDecode(jwtDecode(x));
+          setAuthenticated(true);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        Alert.alert('Login Failed','Incorrect email or password. Please try again.');
+      });
   };
 
   const LogOut = () => {
     setAuthenticated(false);
   };
+
+  
+
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, LogIn, LogOut, decode, setLoading, isLoading }}
+      value={{ isAuthenticated, LogIn, LogOut, decode }}
     >
-      {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
       {children}
     </AuthContext.Provider>
   );
 };
 export { AuthContext, MyProvider };
+
+const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})

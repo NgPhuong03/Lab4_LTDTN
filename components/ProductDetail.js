@@ -1,10 +1,10 @@
 import { View , Text, StyleSheet, StatusBar} from "react-native"
 
-export default Categories = () => {
-    return (
+export default ProductDetail = () => {
+    return (    
         <View style={styles.container}>
             <StatusBar backgroundColor={'#999'}/>
-            <Text>Categories screen</Text>
+            <Text>Favourites screen</Text>
         </View>
     )
 }

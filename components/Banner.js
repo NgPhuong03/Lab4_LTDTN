@@ -1,7 +1,7 @@
 import { View, StyleSheet, useWindowDimensions } from "react-native";
 import { bannerImg } from "../data/bannerImage";
 import { useState } from "react";
-import RenderItem from "../components/RenderItem";
+import RenderItem from "../CustomComponents/RenderItem";
 import Animated, {
   scrollTo,
   useAnimatedRef,
@@ -39,7 +39,7 @@ export default Banner = () => {
   }, [isAutoplay, offset]);
 
   return (
-    <View >
+    <View style={{marginVertical: 4}}>
       <Animated.FlatList
         contentContainerStyle={{ flexGrow: 1 }}
         onScrollBeginDrag={() => setAutoplay(false)}
