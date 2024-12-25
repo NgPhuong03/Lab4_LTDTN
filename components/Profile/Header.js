@@ -7,7 +7,7 @@ export default Header = ({ user , navigation, setUser}) => {
     if (!string) return ""; // Kiểm tra chuỗi rỗng
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  const avt = require("../assets/avt.jpg");
+  const avt = require("../../assets/avt.jpg");
   const name =
     capitalizeFirstLetter(user.name.firstname) + " " + capitalizeFirstLetter(user.name.lastname);
   return (
@@ -19,7 +19,7 @@ export default Header = ({ user , navigation, setUser}) => {
         />
         <Text style={styles.text}>{name}</Text>
       </View>
-      <TouchableOpacity onPress={() => {navigation.navigate('EditProfile', {user: user, setUser: setUser})}}>
+      <TouchableOpacity onPress={() => {navigation.navigate('EditProfile', {user: user, setUser: { action: setUser}})}}>
         <Icon name="edit" size={40} />
       </TouchableOpacity>
     </View>

@@ -1,7 +1,7 @@
 import { View, StyleSheet, useWindowDimensions } from "react-native";
-import { bannerImg } from "../data/bannerImage";
+import { bannerImg } from '../../data/bannerImage';
 import { useState } from "react";
-import RenderItem from "../CustomComponents/RenderItem";
+import RenderItem from "../RenderItem";
 import Animated, {
   scrollTo,
   useAnimatedRef,

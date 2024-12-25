@@ -1,27 +1,30 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View ,Text, StyleSheet} from 'react-native';
-import Home from '../screens/Home';
-import Categories from '../screens/Categories';
-import Favourites from '../screens/Favourites';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ProfileStack from './ProfileStack';
+import Homestack from './Home/Homestack';
+import ProfileStack from './Profile/ProfileStack';
+import CategoriesStack from './Categories/CategoriesStack';
+import Cart from '../screens/Cart';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 
 const MainBottom = createBottomTabNavigator();
 export default BottomNavigation = () => {
+  const {amountCart} = useContext(AuthContext)
   return (
     <MainBottom.Navigator screenOptions={{headerShown: true, tabBarLabelStyle: {fontSize:12}}} >
-      <MainBottom.Screen name='Home' component={Home} 
+      <MainBottom.Screen name='Home' component={Homestack} 
         options={{tabBarIcon: ({size,color}) => <Icon name="home" size={size} color={color}/>}}/>
-      <MainBottom.Screen name='Categories' component={Categories} 
+      <MainBottom.Screen name='Categories' component={CategoriesStack} 
         options={{tabBarIcon: ({size,color}) => <Icon name="th-large" size={size} color={color}/>}}/>
-      <MainBottom.Screen name='Favourites' component={Favourites} 
+      <MainBottom.Screen name='Cart' component={Cart} 
         options={{tabBarIcon: ({size,color}) => 
             (
                 <View>
-                  <Icon name="heart" size={size} color={color}/>  
+                  <Icon name="shopping-cart" size={size} color={color}/>  
                   <View style={styles.soluong}>
                     <Icon name='circle' size={16} color={'red'}/>
-                    <Text style={styles.soluongText}>3</Text>
+                    <Text style={styles.soluongText}>{amountCart}</Text>
                   </View>
                 </View>
             )

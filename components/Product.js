@@ -7,20 +7,24 @@ import {
   Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-export default Product = ({ item }) => {
-  console.log("Prod compn loaded");
-
+export default Product = ({ item, onPress }) => {
   const { width } = useWindowDimensions();
   const edge = width * 0.45;
 
+  // Function
+
+  const handleAddtoCart = () => {
+    console.log("add pressed", item.id);
+  };
+
   return (
-    <TouchableOpacity 
-    style={[{ width: edge, height: edge + edge * 2/4  }, styles.container]}
-    onPress={() => {console.log('prod pressed');
-    }}>
+    <TouchableOpacity
+      style={[{ width: edge, height: edge + (edge * 2) / 4 }, styles.container]}
+      onPress={() => onPress(item.id)}
+    >
       <Image
         source={{ uri: item.image }}
-        style={{ width: edge, height: edge , resizeMode: 'contain'}}
+        style={{ width: edge - 12, height: edge, resizeMode: "contain", alignSelf: 'center' }}
       />
       <Text style={styles.title} numberOfLines={2}>
         {item.title}
@@ -41,11 +45,7 @@ export default Product = ({ item }) => {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.addBtn} 
-        onPress={() => {
-          console.log('add pressed');
-          
-        }}>
+        <TouchableOpacity style={styles.addBtn} onPress={() =>handleAddtoCart()}>
           <Icon name="plus" color={"white"} size={20} />
         </TouchableOpacity>
       </View>
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     backgroundColor: "white",
     margin: 4,
-    borderWidth: 1, 
-    borderRadius: 8
+    borderWidth: 1,
+    borderRadius: 8,
   },
   title: {
     height: 40,

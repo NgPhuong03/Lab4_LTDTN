@@ -1,38 +1,35 @@
-import { View, StyleSheet, StatusBar, ActivityIndicator, ScrollView } from "react-native";
-import Banner from "../components/Banner";
-import HotDeals from "../components/HotDeals";
+import {
+  View,
+  StyleSheet,
+  StatusBar,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
+import Banner from "../components/Home/Banner";
+import HotDeals from "../components/Home/HotDeals";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Slogan from "../components/Slogan";
-import NewArrival from "../components/NewArrival";
+import Slogan from "../components/Home/Slogan";
+import NewArrival from "../components/Home/NewArrival";
 
-
-export default Home = () => {
+export default Home = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
   const [prods, setProds] = useState();
   const [hotdeals, setHotdeals] = useState();
   const [newArrvial, setNews] = useState();
-  const LoadingView = () => {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator size="large" color="#006633" />
-      </View>
-    );
-  };
 
   useEffect(() => {
+    
     fetchdata = async () => {
       await axios
         .get("https://fakestoreapi.com/products")
         .then(function (res) {
           let x = res.data;
-          let hots = x.filter(e => 
-            e.price < 100
-          )
-          let newArr = x.filter( e => e.id > 9)
+          let hots = x.filter((e) => e.price < 100);
+          let newArr = x.filter((e) => e.id > 9);
           setHotdeals(hots);
           setNews(newArr);
-          setProds(x);  
+          setProds(x);
           setLoading(false);
         })
         .catch(function (e) {
@@ -42,6 +39,19 @@ export default Home = () => {
 
     fetchdata();
   }, []);
+
+  turnOffHeaderShown = () => {};
+  const toDetail = (id) => {
+    navigation.navigate("HomeDetail", {id: id});
+  };
+
+  const LoadingView = () => {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" color="#006633" />
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={"#999"} />
@@ -52,8 +62,8 @@ export default Home = () => {
           <ScrollView style={{ flexGrow: 1 }}>
             <Slogan />
             <Banner />
-            <HotDeals items={hotdeals} />
-            <NewArrival items={newArrvial} />
+            <HotDeals items={hotdeals} onPress={toDetail} />
+            <NewArrival items={newArrvial} onPress={toDetail} />
           </ScrollView>
         </View>
       )}

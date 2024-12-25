@@ -5,15 +5,14 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import Product from "../CustomComponents/Product";
-import { useEffect, useState } from "react";
+import Product from "../Product";
 
-export default NewArrial = ({ items }) => {
+export default HotDeals = ({ items , onPress}) => {
  
 
   const renderItem = ({ item }) => (
     <View>
-      <Product item={item} />
+      <Product item={item} onPress={onPress}/>
     </View>
   );
 
@@ -24,7 +23,7 @@ export default NewArrial = ({ items }) => {
         <Text style={styles.title}>Hot Deals</Text>
         <Image
           style={styles.icon}
-          source={require("../assets/icon/fire.png")}
+          source={require("../../assets/icon/fire.png")}
         />
       </View>
       

@@ -12,6 +12,17 @@ const MyProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [decode, setDecode] = useState();
+  const [amountCart, setAmount] = useState();
+  const [cart, setCartData] = useState(null);
+
+  fetchCart = async () => {
+    const res = await axios.get(
+      "https://fakestoreapi.com/carts/user/" + decode.sub
+    );
+    data = res.data[0];
+    setCartData(data);
+    setAmount(data.products.length)
+  };
 
   const LogIn = async (username, password) => {
     await axios
@@ -24,8 +35,9 @@ const MyProvider = ({ children }) => {
         setToken(x);
         console.log("token: " + x);
 
-        if (x) {
+        if(x) {
           setDecode(jwtDecode(x));
+          fetchCart();
           setAuthenticated(true);
         }
       })
@@ -39,11 +51,13 @@ const MyProvider = ({ children }) => {
     setAuthenticated(false);
   };
 
+
+
   
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, LogIn, LogOut, decode }}
+      value={{ isAuthenticated, LogIn, LogOut, decode , amountCart, setAmount, cart}}
     >
       {children}
     </AuthContext.Provider>

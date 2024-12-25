@@ -9,8 +9,8 @@ import {
 import { AuthContext } from "../AuthContext";
 import axios from "axios";
 import { TouchableOpacity } from "react-native";
-import Header from "../components/Header";
-import UserInfo from "../components/UserInfo";
+import Header from "../components/Profile/Header";
+import UserInfo from "../components/Profile/UserInfo";
 
 export default Profile = ({ navigation }) => {
   const [user, setUser] = useState();
