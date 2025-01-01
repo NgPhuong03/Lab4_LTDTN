@@ -1,14 +1,44 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { Image, StyleSheet, Text, View } from "react-native";
+import { AuthContext } from "../AuthContext";
 
-export default CartItem = ({ item, quantity }) => {
+export default function CartItem({
+  item,
+  quantity,
+  deleteItem,
+  totalAmount,
+  setTotalAmount,
+}) {
   const [amount, setAmount] = useState(quantity);
+  const { cartProd, cart, user } = useContext(AuthContext);
+
+  const update = async () => {
+    let now = new Date();
+    await fetch(`https://fakestoreapi.com/carts/${cart.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        userId: user.id,
+        date: now,
+        products: cartProd,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  };
 
   const handleMinus = () => {
     if (amount > 1) {
       setAmount(amount - 1);
+      setTotalAmount(totalAmount - item.price);
+      update();
     }
+  };
+
+  const handlePlus = () => {
+    setAmount(amount + 1);
+    setTotalAmount(totalAmount + item.price);
+    update();
   };
 
   return (
@@ -30,11 +60,11 @@ export default CartItem = ({ item, quantity }) => {
               justifyContent: "space-between",
             }}
           >
-            <Text onPress={() => handleMinus()} style={styles.minus}>
+            <Text onPress={handleMinus} style={styles.minus}>
               -
             </Text>
             <Text style={styles.amount}>{amount}</Text>
-            <Text onPress={() => setAmount(amount+1)} style={styles.add}>
+            <Text onPress={handlePlus} style={styles.add}>
               +
             </Text>
           </View>
@@ -50,21 +80,28 @@ export default CartItem = ({ item, quantity }) => {
             justifyContent: "space-evenly",
           }}
         >
-          <View style={{justifyContent: 'center', alignItems: 'center', paddingRight: 4}}>
-            <Text style={styles.total}>Total: ${item.price * amount}</Text>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              paddingRight: 4,
+            }}
+          >
+            <Text style={styles.total}>
+              Total: ${(item.price * amount).toFixed(2)}
+            </Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => deleteItem(item, amount)}>
             <Image
-            source={require("../assets/icon/close.png")}
-            style={styles.delete}
-          />
+              source={require("../assets/icon/close.png")}
+              style={styles.delete}
+            />
           </TouchableOpacity>
-          
         </View>
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

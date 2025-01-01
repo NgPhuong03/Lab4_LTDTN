@@ -8,18 +8,18 @@ import {
 import Banner from "../components/Home/Banner";
 import HotDeals from "../components/Home/HotDeals";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slogan from "../components/Home/Slogan";
 import NewArrival from "../components/Home/NewArrival";
+import { AuthContext } from "../AuthContext";
 
-export default Home = ({ navigation }) => {
+export default  function Home ({ navigation }) {
   const [isLoading, setLoading] = useState(true);
-  const [prods, setProds] = useState();
-  const [hotdeals, setHotdeals] = useState();
-  const [newArrvial, setNews] = useState();
+  const [prods, setProds] = useState(null);
+  const [hotdeals, setHotdeals] = useState(null);
+  const [newArrvial, setNews] = useState(null);
 
   useEffect(() => {
-    
     fetchdata = async () => {
       await axios
         .get("https://fakestoreapi.com/products")
@@ -55,9 +55,9 @@ export default Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={"#999"} />
-      {isLoading ? (
+      {isLoading ? 
         <LoadingView />
-      ) : (
+       : 
         <View>
           <ScrollView style={{ flexGrow: 1 }}>
             <Slogan />
@@ -66,7 +66,7 @@ export default Home = ({ navigation }) => {
             <NewArrival items={newArrvial} onPress={toDetail} />
           </ScrollView>
         </View>
-      )}
+      }
     </View>
   );
 };

@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { View, Text, StyleSheet, StatusBar } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { AuthContext } from "../../AuthContext";
 
-export default EditProfile = ({ route, navigation }) => {
+export default function EditProfile({ route, navigation }) {
+  const { user, setUser } = useContext(AuthContext);
+  var data = { ...user };
+
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -24,13 +28,19 @@ export default EditProfile = ({ route, navigation }) => {
     });
   }, [navigation]);
 
-  const HanldeConfirmPressed = () => {
+  const HanldeConfirmPressed = async () => {
+    console.log(user);
+    
+    await fetch(`https://fakestoreapi.com/users/${user.id}`, {
+      method: "PUT",
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json));
     setUser(data);
     navigation.pop();
   };
 
-  const { user, setUser } = route.params;
-  var data = { ...user };
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={"#999"} />
@@ -117,7 +127,7 @@ export default EditProfile = ({ route, navigation }) => {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

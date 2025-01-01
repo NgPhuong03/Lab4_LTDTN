@@ -4,7 +4,7 @@ import SignUp from '../screens/SignUp';
 
 const AuthStack = createStackNavigator();
 
-export default AuthScreen = () => {
+export default function AuthScreen () {
     return(
         <AuthStack.Navigator screenOptions={{headerShown: false}}>
             <AuthStack.Screen name='SignIn' component={SignIn} options={{headerShown:false}}/>

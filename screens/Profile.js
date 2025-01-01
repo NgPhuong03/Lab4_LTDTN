@@ -12,9 +12,8 @@ import { TouchableOpacity } from "react-native";
 import Header from "../components/Profile/Header";
 import UserInfo from "../components/Profile/UserInfo";
 
-export default Profile = ({ navigation }) => {
-  const [user, setUser] = useState();
-  const { LogOut, decode } = useContext(AuthContext);
+export default function Profile ({ navigation }) {
+  const {user, setUser, LogOut, decode } = useContext(AuthContext);
 
   const handlerSetUser = (e) => {
     setUser(e);

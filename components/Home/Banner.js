@@ -11,7 +11,7 @@ import Animated, {
 import { useRef } from "react";
 import { useEffect } from "react";
 
-export default Banner = () => {
+export default function Banner () {
   const { width } = useWindowDimensions();
 
   const [data, setData] = useState(bannerImg);

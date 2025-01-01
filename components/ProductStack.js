@@ -4,7 +4,7 @@ import Product from "./Product";
 
 const Stack = createStackNavigator();
 
-export default ProductStack = () => {
+export default function ProductStack (){
   return (
     <Stack.Navigator>
       <Stack.Screen

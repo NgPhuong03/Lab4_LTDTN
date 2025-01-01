@@ -1,6 +1,6 @@
 import { useWindowDimensions, View, Image, StyleSheet } from "react-native";
 
-export default RenderItem = ({ index, item }) => {
+export default function RenderItem ({ index, item }) {
   const { width } = useWindowDimensions();
   return (
     <View style={{width: width, height:width/2}}>

@@ -1,6 +1,6 @@
-import { View , Text, StyleSheet, StatusBar} from "react-native"
+import { View , Text, StyleSheet} from "react-native"
 
-export default Slogan = () => {
+export default function Slogan () {
     return (
         <View style={styles.container}>
             <Text style={styles.slogan}>PHONG CÁCH THỜI THƯỢNG</Text>

@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, StatusBar } from "react-native";
 
-export default UserInfo = ({ user }) => {
+export default function UserInfo ({ user }) {
   return (
     
     <View style={styles.maincontainer}>

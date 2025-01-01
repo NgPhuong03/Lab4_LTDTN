@@ -6,7 +6,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
-export default Homestack = ({navigation, route}) => {
+export default function Homestack ({navigation, route}) {
   React.useLayoutEffect(() => {
     const routeName = getFocusedRouteNameFromRoute(route);
     if (routeName === "HomeDetail"){

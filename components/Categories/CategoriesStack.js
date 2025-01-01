@@ -6,7 +6,7 @@ import Categories from "../../screens/Categories";
 
 const Stack = createStackNavigator();
 
-export default CategoriesStack = ({navigation, route}) => {
+export default function CategoriesStack ({navigation, route})  {
   React.useLayoutEffect(() => {
     const routeName = getFocusedRouteNameFromRoute(route);
     if (routeName === "CateDetail"){

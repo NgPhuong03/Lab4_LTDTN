@@ -5,7 +5,7 @@ import { TextInput } from "react-native-gesture-handler"
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
-export default SignIn = ({navigation}) => {
+export default function SignIn ({navigation}) {
     const [username,setusername] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -17,7 +17,6 @@ export default SignIn = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar backgroundColor={'#999'}/>
             <LogoAndText text={'Create New Account'}/>
 
             <View style={styles.ContentContainer}>

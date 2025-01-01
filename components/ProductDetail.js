@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default ProductDetail = ({ navigation, route }) => {
+export default function ProductDetail  ({ navigation, route }) {
   const { width } = useWindowDimensions();
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState(null);

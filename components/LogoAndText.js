@@ -1,7 +1,7 @@
 import { Image, View, StyleSheet, Text, Platform } from "react-native"
 
 
-export default LogoAndText = ({text}) => {
+export default function LogoAndText ({text}) {
     return (
         <View style={styles.container}>
             <Image style={styles.Logo} source={ require('../assets/reactnativeLogo.jpg') }/>

@@ -14,7 +14,7 @@ import { TextInput } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { AuthContext } from "../AuthContext";
 
-export default SignIn = ({ navigation }) => {
+export default function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export default SignIn = ({ navigation }) => {
     navigation.navigate("SignUp");
   };
 
-  const { LogIn } = useContext(AuthContext);
+  const {LogIn}  = useContext(AuthContext);
 
   const handlerLogin = async (username, password) => {
     setLoading(true);

@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import {  Text, StyleSheet, Image } from "react-native";
 
-export default RenderItem = ({ title, selected, set }) => {
+export default function RenderItem ({ title, selected, set }) {
   var img,
     isSelected = false;
   switch (title) {

@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Product from "../Product";
 
-export default NewArrial = ({ items, onPress}) => {
+export default function NewArrial ({ items, onPress}) {
  
 
   const renderItem = ({ item }) => (

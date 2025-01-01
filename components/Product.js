@@ -1,4 +1,5 @@
-import { TouchableOpacity } from "react-native";
+import { useContext } from "react";
+import { Alert, TouchableOpacity } from "react-native";
 import {
   useWindowDimensions,
   View,
@@ -7,14 +8,41 @@ import {
   Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-export default Product = ({ item, onPress }) => {
+import { AuthContext } from "../AuthContext";
+export default function Product({ item, onPress }) {
+  const { setAmount, cartProd, setCartProd, amountCart, cart, user } =
+    useContext(AuthContext);
   const { width } = useWindowDimensions();
   const edge = width * 0.45;
 
   // Function
 
-  const handleAddtoCart = () => {
+  const handleAddtoCart = async () => {
     console.log("add pressed", item.id);
+    let prod = {
+      productId: item.id,
+      quantity: 1,
+    };
+
+    if (!cartProd.find((x) => x.productId === item.id)) {
+      setCartProd([...cartProd, prod]);
+      setAmount(amountCart + 1);
+      let now = new Date();
+      await fetch(`https://fakestoreapi.com/carts/${cart.id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          userId: user.id,
+          date: now,
+          products: cartProd,
+        }),
+      })
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+      
+      
+    } else {
+      Alert.alert("Message", "This product is already in your cart.");
+    }
   };
 
   return (
@@ -24,7 +52,12 @@ export default Product = ({ item, onPress }) => {
     >
       <Image
         source={{ uri: item.image }}
-        style={{ width: edge - 12, height: edge, resizeMode: "contain", alignSelf: 'center' }}
+        style={{
+          width: edge - 12,
+          height: edge,
+          resizeMode: "contain",
+          alignSelf: "center",
+        }}
       />
       <Text style={styles.title} numberOfLines={2}>
         {item.title}
@@ -45,13 +78,16 @@ export default Product = ({ item, onPress }) => {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.addBtn} onPress={() =>handleAddtoCart()}>
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={handleAddtoCart}
+        >
           <Icon name="plus" color={"white"} size={20} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

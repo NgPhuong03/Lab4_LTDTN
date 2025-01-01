@@ -10,8 +10,9 @@ import {
   ActivityIndicator
 } from "react-native";
 import RenderItem from "../components/Categories/RenderItem";
+import Product from '../components/Product';
 
-export default Categories = ({ navigation }) => {
+export default function Categories ({ navigation })  {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState();
   const [categories, setCategories] = useState();
